@@ -5,8 +5,10 @@ class Test extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('common/header_view');
-		$this->load->view('common/content_view');
-		$this->load->view('common/footer_view');
+		$header_data = array();
+		$header_data['title'] = 'Log in';
+		$header_data['menu'] = '';
+
+		$this->load->view('login_view', $header_data);
 	}
 }
