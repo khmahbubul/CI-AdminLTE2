@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -66,7 +68,7 @@
                 <img src="<?php echo base_url(); ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $user_data->name . ' - ' . $user_data->role; ?>
+                  <?php echo $user_data->name . ' - ' . $user_data->role_id; ?>
                   <small>Member since <?php echo date_format(date_create($user_data->insertion_date), 'F Y'); ?></small>
                 </p>
               </li>
@@ -110,22 +112,17 @@
             <i class="fa fa-th"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li <?php if($menu == 'permissions') echo 'class="active"'; ?>>
-          <a href="<?php echo base_url(); ?>/permissions">
-            <i class="fa fa-th"></i> <span>Permissions</span>
-          </a>
-        </li>
-        <li class="treeview">
+        <li class="treeview <?php if($menu == 'all_permissions' || $menu == 'all_user_roles') echo 'active menu-open'; ?>">
           <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
+            <i class="fa fa-key"></i>
+            <span>Manage Users</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
+            <li <?php if($menu == 'all_permissions') echo 'class="active"'; ?>><a href="<?php echo base_url(); ?>permissions"><i class="fa fa-circle-o"></i> All permissions</a></li>
+            <li <?php if($menu == 'all_user_roles') echo 'class="active"'; ?>><a href="<?php echo base_url(); ?>user_roles"><i class="fa fa-circle-o"></i> All user roles</a></li>
             <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
             <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
           </ul>
@@ -136,3 +133,35 @@
   </aside>
 
   <!-- =============================================== -->
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <div class="row">
+      <br>
+      <?php if(isset($_SESSION['success'])) { ?>
+        <div class="col-md-8 short_life" style="position: fixed;z-index: 999;right: 10px;">
+          <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-check"></i> Success!</h4>
+            <?php echo $_SESSION['success']; ?>
+          </div>
+        </div>
+        <script>
+          setTimeout(function() {
+            $(".short_life").fadeOut("slow");
+          }, 3000);
+        </script>
+      <?php } else if(isset($_SESSION['error'])) { ?>
+        <div class="col-md-8 short_life" style="position: fixed;z-index: 999;right: 10px;">
+          <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-check"></i> Error!</h4>
+            <?php echo $_SESSION['error']; ?>
+          </div>
+        </div>
+        <script>
+          setTimeout(function() {
+            $(".short_life").fadeOut("slow");
+          }, 3000);
+        </script>
+      <?php } ?>
+    </div>
