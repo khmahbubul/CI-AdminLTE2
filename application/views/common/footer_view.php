@@ -20,8 +20,11 @@
         <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title"><?php echo str_replace('_', ' ', ucfirst($controller)); ?></h4>
       </div>
-      <div class="modal-body" id="modal_default_body">
-        <p>Loading ...</p>
+      <div class="modal-body">
+        <div id="modal_default_body_warning" style="color: red;font-weight: bold;"></div>
+        <div id="modal_default_body">
+          <p>Loading ...</p>
+        </div>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -72,6 +75,28 @@
           location.reload();
         });
       }
+    });
+
+    //for ajax forms
+    $(document).on('submit', '.ajax_form', function(e) {
+      var form = $(this);
+      var url = form.attr('action');
+
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: form.serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+          // show response from the php script.
+          if(data.length == 0)
+            location.reload();
+          
+          $("#modal_default_body_warning").html(data);
+        }
+      });
+
+      e.preventDefault(); // avoid to execute the actual submit of the form.
     });
 	});
 </script>

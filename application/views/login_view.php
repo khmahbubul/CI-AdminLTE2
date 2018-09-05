@@ -44,7 +44,7 @@
 
     <form action="<?php echo base_url(); ?>login/do_login" method="post">
       <div class="form-group has-feedback">
-        <input type="email" name="user_email" class="form-control" placeholder="Email" required>
+        <input type="email" name="user_email" class="form-control" value="<?php echo set_value('user_email'); ?>" placeholder="Email" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">

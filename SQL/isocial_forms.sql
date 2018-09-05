@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2018 at 01:40 PM
+-- Generation Time: Sep 05, 2018 at 08:42 AM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.1.19
 
@@ -39,8 +39,9 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `permission_name`, `insertion_date`) VALUES
-(1, 'manage_registration', '2018-08-30 07:14:13'),
-(2, 'manage_permissions', '2018-09-03 04:10:46');
+(1, 'manage_registration', '2018-09-04 06:05:49'),
+(2, 'manage_permissions', '2018-09-04 06:06:01'),
+(3, 'manage_user_roles', '2018-09-04 06:06:28');
 
 -- --------------------------------------------------------
 
@@ -60,8 +61,9 @@ CREATE TABLE `role_permissions` (
 --
 
 INSERT INTO `role_permissions` (`id`, `role_id`, `permission_id`, `insertion_date`) VALUES
-(4, 1, 2, '2018-09-03 11:35:04'),
-(5, 3, 1, '2018-09-03 11:35:10');
+(10, 5, 1, '2018-09-05 04:17:24'),
+(11, 5, 2, '2018-09-05 04:17:24'),
+(12, 5, 3, '2018-09-05 04:17:24');
 
 -- --------------------------------------------------------
 
@@ -85,7 +87,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `role_id`, `email`, `password`, `is_active`, `update_date`, `insertion_date`) VALUES
-(1, 'Mahbubul Islam', 4, 'khmahbub20@gmail.com', '$2y$10$ePgVIpe.RCVQHig92dqNP.3aeXGsyubMAY4TJS9j6TDLuMDhyJ7nO', 1, '2018-08-29 11:47:35', '2018-08-29 07:03:51');
+(1, 'Mahbubul Islam', 5, 'khmahbub20@gmail.com', '$2y$10$ePgVIpe.RCVQHig92dqNP.3aeXGsyubMAY4TJS9j6TDLuMDhyJ7nO', 1, '2018-09-05 05:51:14', '2018-08-29 07:03:51'),
+(2, 'Nujhat Tabassum', 1, 'nujhat.tabassum@isocial.com.bd', '$2y$10$92Jir0W1GwJ4xFHVAhpKb.Gcaz7FvIdN/vTIps7SbgIx2uby/CJYy', 1, '2018-09-05 06:19:51', '2018-09-04 10:45:25');
 
 -- --------------------------------------------------------
 
@@ -104,9 +107,11 @@ CREATE TABLE `user_roles` (
 --
 
 INSERT INTO `user_roles` (`id`, `role_name`, `insertion_date`) VALUES
-(1, 'Developer', '2018-09-03 06:41:28'),
-(2, 'Admin', '2018-09-03 06:42:31'),
-(3, 'Recommender', '2018-09-03 06:43:30');
+(1, 'Applicant', '2018-09-04 06:08:42'),
+(2, 'Finance', '2018-09-04 06:09:04'),
+(3, 'Recommender', '2018-09-04 06:09:14'),
+(4, 'Admin', '2018-09-04 06:09:20'),
+(5, 'Developer', '2018-09-04 06:09:47');
 
 --
 -- Indexes for dumped tables
@@ -147,25 +152,25 @@ ALTER TABLE `user_roles`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `role_permissions`
 --
 ALTER TABLE `role_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_roles`
 --
 ALTER TABLE `user_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

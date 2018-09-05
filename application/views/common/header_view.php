@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="author" content="Khandakar Mahbubul Islam (khmahbub20@gmail.com)">
   <title><?php echo $title; ?> | iSocial Forms</title>
+  <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="<?php echo base_url(); ?>assets/favicon.ico" type="image/x-icon">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -112,7 +115,7 @@
             <i class="fa fa-th"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="treeview <?php if($menu == 'all_permissions' || $menu == 'all_user_roles') echo 'active menu-open'; ?>">
+        <li class="treeview <?php if($menu == 'all_users' || $menu == 'all_permissions' || $menu == 'all_user_roles') echo 'active menu-open'; ?>">
           <a href="#">
             <i class="fa fa-key"></i>
             <span>Manage Users</span>
@@ -121,10 +124,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <li <?php if($menu == 'all_users') echo 'class="active"'; ?>><a href="<?php echo base_url(); ?>users"><i class="fa fa-circle-o"></i> All users</a></li>
             <li <?php if($menu == 'all_permissions') echo 'class="active"'; ?>><a href="<?php echo base_url(); ?>permissions"><i class="fa fa-circle-o"></i> All permissions</a></li>
             <li <?php if($menu == 'all_user_roles') echo 'class="active"'; ?>><a href="<?php echo base_url(); ?>user_roles"><i class="fa fa-circle-o"></i> All user roles</a></li>
-            <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
           </ul>
         </li>
       </ul>

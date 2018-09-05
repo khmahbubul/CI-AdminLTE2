@@ -9,24 +9,24 @@ class User_roles extends CI_Controller {
 	{
 		parent::__construct();
 
-		$this->header_data['controller'] = 'user_roles';
-		$this->header_data['title'] = 'All user roles';
-		$this->header_data['menu'] = 'all_user_roles';
-		$this->header_data['error'] = '';
-
-		if(!$this->session->userdata('logged_in'))
+		//checking if user is logged in & has manage_user_roles = 3 permission
+		$user = role_has_access(3);
+		if(!$user['response'])
 		{
 			redirect(base_url(), 'refresh');
 			exit;
 		}
+
+		$this->header_data['controller'] = 'user_roles';
+		$this->header_data['title'] = 'All user roles';
+		$this->header_data['menu'] = 'all_user_roles';
+		$this->header_data['error'] = '';
+		$this->header_data['user_data'] = $user['data'];
 	}
 
 
 	public function index()
-	{
-		$id = $this->session->userdata('id');
-		
-		$this->header_data['user_data'] = $this->db->get_where('users', array('id' => $id))->row();
+	{		
 		$this->header_data['user_roles'] = $this->db->get('user_roles')->result();
 
 		$this->load->view('common/header_view', $this->header_data);

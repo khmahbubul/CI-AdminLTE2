@@ -9,24 +9,24 @@ class Permissions extends CI_Controller {
 	{
 		parent::__construct();
 
-		$this->header_data['controller'] = 'permissions';
-		$this->header_data['title'] = 'All permissions';
-		$this->header_data['menu'] = 'all_permissions';
-		$this->header_data['error'] = '';
-
-		if(!$this->session->userdata('logged_in'))
+		//checking if user is logged in & has manage_permissions = 2 permission
+		$user = role_has_access(2);
+		if(!$user['response'])
 		{
 			redirect(base_url(), 'refresh');
 			exit;
 		}
+
+		$this->header_data['controller'] = 'permissions';
+		$this->header_data['title'] = 'All permissions';
+		$this->header_data['menu'] = 'all_permissions';
+		$this->header_data['error'] = '';
+		$this->header_data['user_data'] = $user['data'];
 	}
 
 
 	public function index()
-	{
-		$id = $this->session->userdata('id');
-		
-		$this->header_data['user_data'] = $this->db->get_where('users', array('id' => $id))->row();
+	{		
 		$this->header_data['permissions'] = $this->db->get('permissions')->result();
 
 		$this->load->view('common/header_view', $this->header_data);
@@ -55,6 +55,7 @@ class Permissions extends CI_Controller {
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			$this->session->set_flashdata('error', validation_errors());
 			redirect('permissions', 'refresh');
 			exit;
 		}
@@ -96,6 +97,7 @@ class Permissions extends CI_Controller {
 	{
 		if(!is_numeric($id))
 		{
+			$this->session->set_flashdata('error', validation_errors());
 			redirect('permissions', 'refresh');
 			exit;
 		}
